@@ -17,9 +17,14 @@ func (po Point) Distance (q Point) float64 {
 	return math.Hypot(q.X-po.X, q.Y-po.Y)
 }
 
-func (p *Point) ScaleBy (factor float64) {
-	p.X *= factor
-	p.Y *= factor
+// error: method redeclared: Point.Distance
+// func (p *Point) ScaleBy (factor float64) {
+// 	p.X *= factor
+// 	p.Y *= factor
+// }
+
+func (p* Point) Distance(q Point) float64 {
+	return math.Hypot(q.X-p.X, q.Y-p.Y)
 }
 
 type Path []Point

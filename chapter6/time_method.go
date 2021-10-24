@@ -17,15 +17,15 @@ func (po Point) Distance (q Point) float64 {
 	return math.Hypot(q.X-po.X, q.Y-po.Y)
 }
 
-// error: method redeclared: Point.Distance
-// func (p *Point) ScaleBy (factor float64) {
-// 	p.X *= factor
-// 	p.Y *= factor
-// }
-
-func (p* Point) Distance(q Point) float64 {
-	return math.Hypot(q.X-p.X, q.Y-p.Y)
+func (p *Point) ScaleBy (factor float64) {
+	p.X *= factor
+	p.Y *= factor
 }
+
+// error: method redeclared: Point.Distance
+// func (p* Point) Distance(q Point) float64 {
+// 	return math.Hypot(q.X-p.X, q.Y-p.Y)
+// }
 
 type Path []Point
 
@@ -67,4 +67,12 @@ func main () {
 	m := make(map[string]string)
 	modify_map(m)
 	fmt.Println(m)
+
+	// 6.4 method values and expressions
+	p2 := Point{1,2}
+	p3 := Point{4,6}
+
+	//distanceFromP: a function binds a method to receiver p2
+	distanceFromP := p2.Distance
+	fmt.Println(distanceFromP(p3))
 }

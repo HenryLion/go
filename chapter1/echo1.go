@@ -69,7 +69,7 @@ func main() {
 	exercise1_1()
 	exercise1_2()
 
-	person1 := Person{Name: "jk", Age: 23, Sex: "male"}
+	person1 := Person{Name: "jk", Age: 0, Sex: "male"}
 	fmt.Println(person1) // 原始变量
 	byte_person, _ := json.Marshal(person1)
 	fmt.Println(byte_person) // 序列化为[]byte
@@ -88,6 +88,9 @@ func main() {
 
 	fmt.Println(map_unmarshal["name"].(string)) // 访问map中key
 	fmt.Println(map_unmarshal["age"])
+	if map_unmarshal["age"].(float64) == 0 {
+		fmt.Println("wocao")
+	}
 	fmt.Println(map_unmarshal["sex"].(string))
 
 	fmt.Println("-------------------------")

@@ -12,6 +12,12 @@ type Movie struct {
 	Actors []string
 }
 
+func getids () (ids []uint32) {
+	idlist := []uint32 {1,2,3}
+	ids = idlist
+	return
+}
+
 func main () {
 	var movie = []Movie {
 		{Title: "Casablanca",
@@ -38,4 +44,22 @@ func main () {
 		log.Fatalf("JSON unmarshaling failed: %s", err)
 	}
 	fmt.Println(titles)
+
+	ids := []uint64 {123456852,45874525}
+	id2 := ids
+	id2[0] = 3
+	fmt.Printf("ids is: %v\n",ids)
+	fmt.Printf("id2 is: %v\n",id2)
+	ids = append(ids, 0)
+	jsonStr, err := json.Marshal(ids)
+
+	fmt.Printf("%s\n", jsonStr)
+
+	fmt.Println(fmt.Sprintf("(id in %s)",jsonStr))
+	fmt.Println(getids())
+
+	fmt.Println(len(ids))
+	for i,v := range ids {
+		fmt.Println(i, v)
+	}
 }

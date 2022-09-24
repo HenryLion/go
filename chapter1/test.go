@@ -1,13 +1,48 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
+import "strconv"
 
-func getIllegalKey(kfuin uint64, userId string) string {
-	return fmt.Sprintf("%d_%s", kfuin, userId)
+func buildRoleFilterStr(roleids []uint32) (roleFilterstr string) {
+	fmt.Printf("buildRoleFilterStr roleids (%v)\n", roleids)
+	if len(roleids) == 0 {
+		return
+	}
+	var strId string
+	for i, v := range roleids {
+		strId = strconv.Itoa(int(v))
+		if i != len(roleids)-1 {
+			//roleFilterstr += " knowledgeRoleList eq \"" + strId + "\" or "
+			roleFilterstr += `knowledgeRoleList eq "` + strId + `" or `
+		} else {
+			//roleFilterstr += " knowledgeRoleList eq \"" + strId + "\""
+			roleFilterstr += `knowledgeRoleList eq "` + strId + `"`
+		}
+	}
+	return
 }
 
 func main() {
-	fmt.Printf("%s\n", getIllegalKey(123454321, "56778"))
+	ids := []uint32{12345, 654567, 23456134}
+	fmt.Printf("xiediansha (%s)\n", buildRoleFilterStr(ids))
 
-	fmt.Println(uint32(1))
+	strnum := "15678"
+	num, _ := strconv.Atoi(strnum)
+	fmt.Println(num)
+
+	newStrNum := fmt.Sprintf("%03d", num+1)
+	fmt.Println(newStrNum)
+
+	str1 := "RW-0007"
+	if strings.Contains(str1, "-") {
+		pos := strings.LastIndex(str1, "-")
+		purenum := str1[pos+1:]
+		fmt.Println(purenum)
+	}
+
+	fmt.Println(len("1234erdf"))
+	fmt.Println(len("中国人"))
 }

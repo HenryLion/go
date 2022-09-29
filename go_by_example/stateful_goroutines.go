@@ -12,18 +12,20 @@ type readOp struct {
 	resp chan int
 }
 
-type writeOp struct {
-	key  int
-	val  int
-	resp chan bool
-}
+//
+//type writeOp struct {
+//	key  int
+//	val  int
+//	resp chan bool
+//}
 
+// 本程序相当于两个goroutine之间，我给你发送channel，你处理完再给我发送个channel，相互交互，完成两个goroutine之间的同步联动
 func main() {
 	var readOps uint64
-	var writeOps uint64
+	//var writeOps uint64
 
 	reads := make(chan readOp)
-	writes := make(chan writeOp)
+	//writes := make(chan writeOp)
 
 	go func() {
 		var state = make(map[int]int)
@@ -31,9 +33,9 @@ func main() {
 			select {
 			case read := <-reads:
 				read.resp <- state[read.key]
-			case write := <-writes:
-				state[write.key] = write.val
-				write.resp <- true
+				//case write := <-writes:
+				//	state[write.key] = write.val
+				//	write.resp <- true
 			}
 		}
 	}()
@@ -53,26 +55,26 @@ func main() {
 		}()
 	}
 
-	for w := 0; w < 10; w++ {
-		go func() {
-			for {
-				write := writeOp{
-					key:  rand.Intn(5),
-					val:  rand.Intn(100),
-					resp: make(chan bool),
-				}
-				writes <- write
-				<-write.resp
-				atomic.AddUint64(&writeOps, 1)
-				time.Sleep(time.Millisecond)
-			}
-		}()
-	}
+	//for w := 0; w < 100; w++ {
+	//	go func() {
+	//		for {
+	//			write := writeOp{
+	//				key:  rand.Intn(5),
+	//				val:  rand.Intn(100),
+	//				resp: make(chan bool),
+	//			}
+	//			writes <- write
+	//			<-write.resp
+	//			atomic.AddUint64(&writeOps, 1)
+	//			time.Sleep(time.Millisecond)
+	//		}
+	//	}()
+	//}
 
 	time.Sleep(time.Second)
 
 	readOpsFinal := atomic.LoadUint64(&readOps)
 	fmt.Println("readOps:", readOpsFinal)
-	writeOpsFianl := atomic.LoadUint64(&writeOps)
-	fmt.Println("writeOps:", writeOpsFianl)
+	//writeOpsFianl := atomic.LoadUint64(&writeOps)
+	//fmt.Println("writeOps:", writeOpsFianl)
 }

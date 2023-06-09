@@ -1,6 +1,13 @@
 package main
 
 import "fmt"
+import "regexp"
+
+func pureNumber(s string) bool {
+	pattern := "^[0-9]+$"
+	match, _ := regexp.MatchString(pattern, s)
+	return match
+}
 
 func main() {
 	var a [5]int
@@ -21,4 +28,7 @@ func main() {
 		}
 	}
 	fmt.Println(twoD)
+
+	fmt.Println(pureNumber("3456789."))
+	fmt.Println(pureNumber("a234235366"))
 }

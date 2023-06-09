@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"path/filepath"
 	"strings"
 )
@@ -34,4 +35,7 @@ func main() {
 
 	rel, err = filepath.Rel("a/b", "a/c/t/file")
 	fmt.Println(rel)
+
+	nowDir, _ := os.Getwd()
+	fmt.Println(nowDir)
 }

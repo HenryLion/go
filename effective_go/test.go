@@ -33,3 +33,7 @@ func b() {
 func main() {
 	b()
 }
+
+// new: 是会进行0初始化的
+// make: 针对map、slice、channel
+//

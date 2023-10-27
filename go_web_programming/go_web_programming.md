@@ -16,3 +16,4 @@
     >
     > PUT,DELETE is idempotent, POST isn't idempotent
 * HTML中的表单元素支持GET和POST两种HTTP方法
+* 使用net/http库，可以直接返回HTML格式数据，然后浏览器就会展示

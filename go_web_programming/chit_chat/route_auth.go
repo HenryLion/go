@@ -29,7 +29,7 @@ func authenticate(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	user, _ := data.UserByEmail(r.PostFormValue("email"))
 	if user.Password == data.Encrypt(r.PostFormValue("password")) {
-		session := user.CreateSession()
+		session, _ := user.CreateSession()
 		cookie := http.Cookie{
 			Name:     "_cookie",
 			Value:    session.Uuid,

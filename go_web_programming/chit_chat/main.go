@@ -14,7 +14,7 @@ func main() {
 	//mux.HandleFunc("/logout", logout)
 	//mux.HandleFunc("signup", signup)
 	//mux.HandleFunc("/signup_account", signupAccount)
-	mux.HandleFunc("/authenticate", authenticate)
+	mux.HandleFunc("/c", authenticate)
 	//mux.HandleFunc("/thread/new", newThread)
 	//mux.HandleFunc("/thread/create", createThread)
 	//mux.HandleFunc("/thread/post", postThread)

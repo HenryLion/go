@@ -18,7 +18,7 @@ func main() {
 	serve := http.Server{
 		Addr: ":8080",
 	}
-	http.HandleFunc("/hello", hello)
+	http.HandleFunc("/hell", hello)
 	http.HandleFunc("/world", world)
 	serve.ListenAndServe()
 }

@@ -26,6 +26,10 @@ func protect(h http.HandlerFunc) http.HandlerFunc {
 	}
 }
 
+func defaulthandle(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "default handler")
+}
+
 func main() {
 	serve := http.Server{
 		Addr: ":8080",
@@ -33,5 +37,8 @@ func main() {
 
 	// 此处看似绑定的log函数，实则是绑定的log函数返回的那个函数，并且在返回的那个函数中调用了hello1函数
 	http.HandleFunc("/hello", protect(log(hello1)))
+
+	// if no match, defaulthandle will be used
+	http.HandleFunc("/", defaulthandle)
 	serve.ListenAndServe()
 }

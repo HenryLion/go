@@ -16,8 +16,7 @@ var Db *sql.DB
 
 func init() {
 	var err error
-	Db, err = sql.Open("postgres", "user=pencilhan dbname=pencilhan password=pencilhan"+
-		"sslmode=disable")
+	Db, err = sql.Open("postgres", "user=pencilhan dbname=pencilhan sslmode=disable")
 	if err != nil {
 		panic(err)
 	}
@@ -51,10 +50,14 @@ func (post *Post) Create() (err error) {
 	statement := "insert into posts (content, author) values ($1, $2) returning id"
 	stmt, err := Db.Prepare(statement)
 	if err != nil {
+		fmt.Println("db prepare failed", err)
 		return
 	}
 	defer stmt.Close()
 	err = stmt.QueryRow(post.Content, post.Author).Scan(&post.Id)
+	if err != nil {
+		fmt.Println("query row failed")
+	}
 	return
 }
 

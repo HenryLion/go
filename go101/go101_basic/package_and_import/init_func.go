@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"runtime"
+)
 
 //import (
 //	"database/sql"
@@ -13,6 +16,7 @@ func init() {
 
 func main() {
 	fmt.Println("bye")
+	fmt.Println(runtime.NumCPU())
 }
 
 func init() {

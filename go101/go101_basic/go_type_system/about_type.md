@@ -9,3 +9,13 @@
 ### 5、signature of function type
 - the signature of a fucntion type is cpmposed of the input parameter list and the output result list, not 
 include the function name and body
+### support or not support comparison
+#### the following types are not comparison
+- slice type
+- map type
+- function type
+- any struct type with a field above
+- **the other types are all comparison**
+
+## pointer
+- return pointer of local variables is safe in go

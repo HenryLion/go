@@ -7,7 +7,7 @@
 - Name has the same type of string
 ### 4、nil is the default value of slice,map,function,channel,pointer and interface
 ### 5、signature of function type
-- the signature of a fucntion type is cpmposed of the input parameter list and the output result list, not 
+- the signature of a function type is composed of the input parameter list and the output result list, not 
 include the function name and body
 ### support or not support comparison
 #### the following types are not comparison

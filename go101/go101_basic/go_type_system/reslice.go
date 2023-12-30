@@ -26,4 +26,5 @@ func main() {
 	for k, v := range s1 {
 		fmt.Println(k, v)
 	}
+
 }

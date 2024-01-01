@@ -35,4 +35,5 @@ func main() {
 		return isMultipleOf3(n) && isMultipleOf5(n)
 	}
 	fmt.Println(isMultipleOf15(60))
+
 }

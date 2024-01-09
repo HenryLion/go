@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"reflect"
 )
 
 type Person struct {
@@ -58,4 +59,22 @@ func main() {
 	gaga.SetAge(31)
 	gaga.PrintName()
 	fmt.Println(gaga.Age)
+
+	// list all the field and methods of type Singer and *Singer with reflect
+	t := reflect.TypeOf(Singer{})
+	fmt.Println(t, "has", t.NumField(), "fields:")
+	for i := 0; i < t.NumField(); i++ {
+		fmt.Print(" field#", i, ": ", t.Field(i).Name, "\n")
+	}
+
+	fmt.Println(t, "has", t.NumMethod(), "methods:")
+	for i := 0; i < t.NumMethod(); i++ {
+		fmt.Print(" method#", i, ": ", t.Method(i).Name, "\n")
+	}
+
+	pt := reflect.TypeOf(&Singer{})
+	fmt.Println(pt, "has", pt.NumMethod(), "methods:")
+	for i := 0; i < pt.NumMethod(); i++ {
+		fmt.Print(" method#", i, ": ", pt.Method(i).Name, "\n")
+	}
 }
